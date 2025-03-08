@@ -17,6 +17,8 @@ The package uses Emacs' `filenotify` library to monitor the file for any changes
 
 * Configuration
 
+** Generalities
+
 1. Set the path of the Org file to be monitored by setting the variable `org-inbox-modeline-counter-watch-file`:
 
 #+begin_src emacs-lisp
@@ -42,6 +44,27 @@ You can change this text to suit your needs. For example, if you’re using this
 #+end_src
 
 With this change, the help-echo text will now display something like “5 tasks in your to-do list.” when you hover over the item count in the mode-line.
+
+** For Doom Emacs users
+
+Add the following to your package.el file:
+
+#+begin_src emacs-lisp
+(package! org-inbox-modeline-counter
+  :recipe (:host github
+           :repo "pablocobelli/org-inbox-modeline-counter"))
+#+end_src
+
+In your config.el, add
+
+#+begin_src emacs-lisp
+(use-package! org-inbox-modeline-counter
+  :custom
+  (org-inbox-modeline-counter-watch-file "/path/to/file/to/watch/filename.org")
+  (org-inbox-modeline-counter-help-echo-text "items in my inbox.")
+  :config
+  (org-inbox-modeline-counter-mode 1))
+#+end_src
 
 * Functions
 
