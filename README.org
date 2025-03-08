@@ -1,0 +1,56 @@
+#+title: org-inbox-modeline-counter
+
+* Purpose
+
+The org-inbox-modeline-counter is an Emacs package that displays the count of first-level headings in an Org-mode file in the mode-line. This can be useful for tracking the number of items in a to-do list or inbox-style Org file, providing real-time updates as the file is modified.
+
+* How it works
+
+This package watches a specified Org file for changes and counts the number of first-level headings (i.e., headings starting with a single asterisk `*`). The count is displayed in the Emacs mode-line, and it is updated automatically when the file changes.
+
+The package uses Emacs' `filenotify` library to monitor the file for any changes (such as edits) and updates the mode-line count accordingly.
+
+* Dependencies
+
+- Emacs 24.3 or higher
+- `filenotify` library (usually available in modern Emacs installations)
+
+* Configuration
+
+1. Set the path of the Org file to be monitored by setting the variable `org-inbox-modeline-counter-watch-file`:
+
+#+begin_src emacs-lisp
+(setq org-inbox-modeline-counter-watch-file "/path/to/your/inbox.org")
+#+end_src
+
+2. Enable the minor mode org-inbox-modeline-counter-mode to start watching the file:
+
+#+begin_src emacs-lisp
+(org-inbox-modeline-counter-mode 1)
+#+end_src
+
+Once the mode is enabled, the item count will appear in the mode-line and will be updated whenever the watched file changes.
+
+3. (Optionally) Specify a custom text to display when hovering the counter
+
+This customizable variable allows you to modify the text that will appear in the mode-line tooltip (when hovering over the item count) alongside the number of first-level headings. By default, it displays: "items in GTD inbox."
+
+You can change this text to suit your needs. For example, if you’re using this for a different purpose, you could modify the string like so:
+
+#+begin_src emacs-lisp
+(setq org-inbox-modeline-counter-help-echo-text "tasks in your to-do list.")
+#+end_src
+
+With this change, the help-echo text will now display something like “5 tasks in your to-do list.” when you hover over the item count in the mode-line.
+
+* Functions
+
+- org-inbox-modeline-counter-item-count: Counts the first-level headings in the watched Org file.
+- org-inbox-modeline-counter-update-modeline: Updates the mode-line with the current count of first-level headings.
+- org-inbox-modeline-counter-start-watching: Starts watching the specified file for changes.
+- org-inbox-modeline-counter-stop-watching: Stops watching the file.
+- org-inbox-modeline-counter-open-inbox: Opens the watched Org file when clicked in the mode-line.
+
+* License
+
+This package is distributed under the terms of the MIT License. See LICENSE for more details.
